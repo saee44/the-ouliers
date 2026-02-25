@@ -1,0 +1,1 @@
+// bind api and js dom in this file
