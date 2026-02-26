@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Profile | EduEvent System</title>
+    <link rel="stylesheet" href="adminprofile.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="admin-profile-container">
+        <aside class="sidebar">
+            <div class="logo">EduEvent <span class="highlight">Admin</span></div>
+            <nav class="side-nav">
+                <a href="admin.html">📊 Dashboard</a>
+                <a href="ermanage.html">📅 Manage Events</a>
+                <a href="adminprofile.html" class="active">👤 Profile Settings</a>
+            </nav>
+            <button class="btn-logout" onclick="window.location.href='index.html'">Sign Out</button>
+        </aside>
+
+        <main class="main-content">
+            <header class="page-header">
+                <h1>Admin Account Settings</h1>
+                <p>Manage your administrative credentials and system preferences.</p>
+            </header>
+
+            <div class="profile-grid">
+                <section class="card profile-main">
+                    <h3>Personal Information</h3>
+                    <form class="admin-form">
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label>Admin Name</label>
+                                <input type="text" value="System Administrator" placeholder="Name">
+                            </div>
+                            <div class="input-group">
+                                <label>Employee ID</label>
+                                <input type="text" value="KBP-ADM-2026" readonly>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>Contact Email</label>
+                            <input type="email" value="admin@kbpcollege.edu">
+                        </div>
+                        <button type="button" class="btn btn-save">Update Profile</button>
+                    </form>
+                </section>
+
+                <section class="card security-settings">
+                    <h3>Security & Authentication</h3>
+                    <div class="security-item">
+                        <div>
+                            <strong>Change Password</strong>
+                            <p>Update your admin access password regularly.</p>
+                        </div>
+                        <button class="btn btn-outline">Change</button>
+                    </div>
+                    <div class="security-item">
+                        <div>
+                            <strong>Two-Factor Auth</strong>
+                            <p>Add an extra layer of security to your account.</p>
+                        </div>
+                        <span class="status-off">Disabled</span>
+                    </div>
+                </section>
+
+                <section class="card system-logs">
+                    <h3>System Logs (Last 24h)</h3>
+                    <ul class="log-list">
+                        <li><span>14:20</span> - New registration: Rahul Deshmukh</li>
+                        <li><span>11:05</span> - Event "Tech Summit" updated</li>
+                        <li><span>09:45</span> - Admin login from IP: 192.168.1.1</li>
+                        <li><span>08:15</span> - System backup completed</li>
+                    </ul>
+                </section>
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>

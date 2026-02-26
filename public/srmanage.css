@@ -1,0 +1,55 @@
+:root {
+    --primary: #10b981;
+    --primary-hover: #059669;
+    --danger: #ef4444;
+    --warning: #f59e0b;
+    --bg: #f8fafc;
+    --white: #ffffff;
+    --text: #1e293b;
+    --text-light: #64748b;
+    --border: #e2e8f0;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); }
+
+.manage-container { max-width: 1300px; margin: 0 auto; padding: 40px 20px; }
+
+/* Header */
+.manage-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+.back-link { text-decoration: none; color: var(--primary); font-weight: 700; font-size: 0.9rem; display: block; margin-bottom: 5px; }
+.manage-header h1 { font-size: 1.8rem; font-weight: 800; }
+
+.header-actions { display: flex; gap: 15px; align-items: center; }
+.user-pill { background: var(--text); color: white; padding: 6px 15px; border-radius: 50px; font-size: 0.8rem; font-weight: 600; }
+
+/* Filters */
+.filter-section { display: flex; justify-content: space-between; background: var(--white); padding: 20px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 25px; }
+.search-wrapper input { padding: 10px 15px; width: 300px; border-radius: 8px; border: 1px solid var(--border); outline: none; }
+.filter-dropdowns { display: flex; gap: 10px; }
+.filter-dropdowns select { padding: 10px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); cursor: pointer; }
+
+/* Table */
+.table-wrapper { background: var(--white); border-radius: 12px; border: 1px solid var(--border); overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+.manage-table { width: 100%; border-collapse: collapse; }
+.manage-table th { background: #f1f5f9; padding: 15px; text-align: left; font-size: 0.8rem; font-weight: 700; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; }
+.manage-table td { padding: 18px 15px; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+
+/* Status Badges */
+.status-badge { padding: 4px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: 700; }
+.status-badge.approved { background: #d1fae5; color: #065f46; }
+.status-badge.pending { background: #fef3c7; color: #92400e; }
+
+/* Action Buttons */
+.action-cells { display: flex; gap: 8px; }
+.action-btn { padding: 6px 12px; border-radius: 6px; border: none; cursor: pointer; font-size: 0.8rem; font-weight: 600; transition: 0.2s; }
+.action-btn.view { background: #f1f5f9; color: var(--text); }
+.action-btn.approve { background: var(--primary); color: white; }
+.action-btn.delete { background: #fee2e2; color: var(--danger); }
+.action-btn:hover { opacity: 0.8; transform: scale(1.05); }
+
+/* Footer */
+.table-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; color: var(--text-light); font-size: 0.85rem; }
+.pagination { display: flex; gap: 5px; }
+.pagination button { padding: 8px 12px; border: 1px solid var(--border); background: var(--white); border-radius: 6px; cursor: pointer; }
+.pagination button.active { background: var(--primary); color: white; border-color: var(--primary); }

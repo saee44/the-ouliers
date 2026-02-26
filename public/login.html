@@ -1,26 +1,78 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Login</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login | EduEvent Portal</title>
+    <link rel="stylesheet" href="register.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="bg-register">
 
-<div class="box">
-  <h2>Login</h2>
+    <div class="register-container animate-fade-up">
+        <div class="register-card">
+            <div class="register-header">
+                <div class="logo">EduEvent <span class="highlight">Portal</span></div>
+                <h1>Welcome Back</h1>
+                <p>Login to your KBP College student account.</p>
+            </div>
 
-  <input type="email" id="email" placeholder="Email">
-  <input type="password" id="password" placeholder="Password">
+            <div class="login-form">
+                <div class="input-group">
+                    <label for="email">University Email</label>
+                    <input type="email" id="email" placeholder="name@kbp.edu" required>
+                </div>
 
-  <button onclick="login()">Login</button>
+                <div class="input-group">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <label for="password">Password</label>
+                        <a href="#" class="highlight" style="font-size: 0.75rem; text-decoration: none;">Forgot?</a>
+                    </div>
+                    <input type="password" id="password" placeholder="••••••••" required>
+                </div>
 
-  <p id="msg"></p>
+                <button class="btn-submit" onclick="login()">Sign In &rarr;</button>
+                
+                <p class="toggle-text">
+                    New to the portal? <a href="register.html" style="color: var(--primary); font-weight: 700; text-decoration: none;">Create an account</a>
+                </p>
+            </div>
 
-  <p>Don't have an account?
-    <a href="signup.html">Signup</a>
-  </p>
-</div>
+            <div class="register-footer">
+                <a href="index.html" style="text-decoration: none; color: #64748b; font-size: 0.85rem;">&larr; Back to Home</a>
+            </div>
+        </div>
+    </div>
 
-<script type="module" src="firebase.js"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCNYDcUqgXKSe7fYCkbfOCNEz0XcIu8yHY",
+            authDomain: "outliers-af84b.firebaseapp.com",
+            projectId: "outliers-af84b",
+            storageBucket: "outliers-af84b.firebasestorage.app",
+            messagingSenderId: "205743069018",
+            appId: "1:205743069018:web:6a6a8dec5ba60b35c38563"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        window.login = function () {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            signInWithEmailAndPassword(auth, email, password)
+                .then(() => {
+                    // Redirecting to HOME page as per your flow requirements
+                    window.location.href = "home.html"; 
+                })
+                .catch(err => {
+                    alert("Login Failed: " + err.message);
+                });
+        };
+    </script>
 </body>
 </html>
