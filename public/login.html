@@ -195,49 +195,6 @@
         </div>
     </div>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
-
-        // Initialize Lucide Icons
-        lucide.createIcons();
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyCNYDcUqgXKSe7fYCkbfOCNEz0XcIu8yHY",
-            authDomain: "outliers-af84b.firebaseapp.com",
-            projectId: "outliers-af84b",
-            storageBucket: "outliers-af84b.firebasestorage.app",
-            messagingSenderId: "205743069018",
-            appId: "1:205743069018:web:6a6a8dec5ba60b35c38563"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-
-        window.login = function () {
-            const emailInput = document.getElementById("email").value;
-            const passwordInput = document.getElementById("password").value;
-
-            if(!emailInput || !passwordInput) {
-                alert("Please fill in all fields.");
-                return;
-            }
-
-            signInWithEmailAndPassword(auth, emailInput, passwordInput)
-                .then((userCredential) => {
-                    const user = userCredential.user;
-
-                    // --- ADMIN ROLE CHECK ---
-                    if (user.email === 'admin@kbp.edu' && passwordInput === '114477') {
-                        window.location.href = "admin-home.html"; 
-                    } else {
-                        window.location.href = "home.html"; 
-                    }
-                })
-                .catch(err => {
-                    alert("Login Failed: " + err.message);
-                });
-        };
-    </script>
+<script src="login.js"></script>
 </body>
 </html>
