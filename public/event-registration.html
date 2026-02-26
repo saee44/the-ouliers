@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Registration | EduEvent Portal</title>
+    <link rel="stylesheet" href="event-reg.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="reg-wrapper">
+        <div class="reg-card animate-slide-in">
+            <a href="event-details.html" class="back-btn">&larr; Back to Event Info</a>
+
+            <div class="reg-header">
+                <span class="event-badge">March 15, 2026</span>
+                <h1>Register for <span class="highlight">Science Fair 2026</span></h1>
+                <p>Please fill out the form below to secure your spot as a participant.</p>
+            </div>
+
+            <form action="#" class="event-form">
+                <div class="form-row">
+                    <div class="input-group">
+                        <label for="full-name">Full Name</label>
+                        <input type="text" id="full-name" placeholder="John Doe" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="prn">PRN / Student ID</label>
+                        <input type="text" id="prn" placeholder="2024CS001" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="input-group">
+                        <label for="dept">Department</label>
+                        <select id="dept" required>
+                            <option value="" disabled selected>Select Department</option>
+                            <option value="cse">CSE</option>
+                            <option value="aids">AIDS</option>
+                            <option value="mech">MECH</option>
+                            <option value="civil">CIVIL</option>
+                            <option value="entc">ENTC</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="year">Year of Study</label>
+                        <select id="year" required>
+                            <option value="fe">First Year (FE)</option>
+                            <option value="se">Second Year (SE)</option>
+                            <option value="te">Third Year (TE)</option>
+                            <option value="be">Final Year (BE)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="category">Participation Category</label>
+                    <select id="category" required>
+                        <option value="project">Project Exhibition</option>
+                        <option value="paper">Research Paper Presentation</option>
+                        <option value="poster">Poster Competition</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="project-title">Project/Paper Title (Optional)</label>
+                    <input type="text" id="project-title" placeholder="e.g. AI based Smart Irrigation">
+                </div>
+
+                <div class="terms">
+                    <input type="checkbox" id="confirm" required>
+                    <label for="confirm">I confirm that the details provided are accurate and I will follow the event guidelines.</label>
+                </div>
+
+                <button type="submit" class="btn-submit">Confirm Registration &rarr;</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
