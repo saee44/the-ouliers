@@ -9,10 +9,12 @@
 <div class="box">
   <h2>Login</h2>
 
-  <input type="email" id="email" placeholder="Email">
-  <input type="password" id="password" placeholder="Password">
+  <form id="loginForm">
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="password" id="password" placeholder="Password" required>
 
-  <button onclick="login()">Login</button>
+    <button type="submit">Login</button>
+  </form>
 
   <p id="msg"></p>
 
@@ -21,6 +23,6 @@
   </p>
 </div>
 
-<script type="module" src="firebase.js"></script>
+<script src="login.js"></script>
 </body>
 </html>
