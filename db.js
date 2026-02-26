@@ -5,7 +5,7 @@ const db = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "root",
-  database: "auth_practice"
+  database: "event_db"
 });
 
 
