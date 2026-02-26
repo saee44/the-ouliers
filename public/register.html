@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Registration | EduEvent Portal</title>
     <link rel="stylesheet" href="register.css">
-    <script src="register.js"></script>
+    <script defer src="register.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body class="bg-register">
@@ -37,23 +37,28 @@
                 <div class="input-group">
                     <label for="department">Department</label>
                     <select id="department" name="department" required>
-                    <option value="" disabled selected>Select Department</option>
-                    <option>Computer Engineering</option>
-                    <option>Information Technology</option>
-                    <option>Mechanical</option>
-                    <option>Electronics</option>
-                    <option>Civil</option>
-                </select>
+                        <option value="" disabled selected>Select Department</option>
+                        <option>Computer Engineering</option>
+                        <option>Information Technology</option>
+                        <option>Mechanical</option>
+                        <option>Electronics</option>
+                        <option>Civil</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="student-id">Student ID</label>
+                    <input type="text" id="student-id" placeholder="Enter your student ID" required>
                 </div>
 
                 <div class="input-group">
                     <label for="semail">University Email Address</label>
-                    <input type="email" id="semail" placeholder="john.doe@university.edu" required>
+                    <input type="email" id="email" placeholder="john.doe@university.edu" required>
                 </div>
 
                 <div class="input-group">
                     <label for="spassword">Password</label>
-                    <input type="password" id="spassword" placeholder="••••••••" required>
+                    <input type="password" id="password" placeholder="••••••••" required>
                 </div>
 
                 <div class="terms">
@@ -61,7 +66,7 @@
                     <label for="terms">I agree to the Terms of Service</label>
                 </div>
 
-                <button type="button" class="btn-submit animate-pulse" onclick="signup()">Create Account</button>
+                <button type="submit" class="btn-submit animate-pulse">Create Account</button>
             </form>
 
             <div class="register-footer">
@@ -69,43 +74,6 @@
             </div>
         </div>
     </div>
-
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyCNYDcUqgXKSe7fYCkbfOCNEz0XcIu8yHY",
-            authDomain: "outliers-af84b.firebaseapp.com",
-            projectId: "outliers-af84b",
-            storageBucket: "outliers-af84b.firebasestorage.app",
-            messagingSenderId: "205743069018",
-            appId: "1:205743069018:web:6a6a8dec5ba60b35c38563"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-
-        window.signup = function () {
-            const email = document.getElementById("semail").value;
-            const password = document.getElementById("spassword").value;
-            const terms = document.getElementById("terms").checked;
-
-            if(!terms) {
-                alert("Please agree to the terms.");
-                return;
-            }
-
-            createUserWithEmailAndPassword(auth, email, password)
-                .then((userCredential) => {
-                    alert("Signup Successful!");
-                    // Redirect to Homepage after successful registration
-                    window.location.href = "home.html";
-                })
-                .catch((error) => {
-                    alert("Error: " + error.message);
-                });
-        };
-    </script>
+    
 </body>
 </html>

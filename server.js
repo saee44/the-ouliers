@@ -91,24 +91,27 @@ app.post("/login", async (req, res) => {
       "SELECT * FROM users WHERE email = ?",
       [email],
       async (err, results) => {
-        if (err) return res.status(500).json({ error: err });
+        if (err) return res.status(500).json({ error: err.message });
 
         if (results.length === 0) {
-          return res.status(400).json({ message: "User not found" });
+          return res.status(404).json({ message: "User not found" });
         }
 
         const user = results[0];
 
-        // compare password
+        // Compare password
         const match = await bcrypt.compare(password, user.password);
 
         if (!match) {
-          return res.status(400).json({ message: "Invalid password" });
+          return res.status(401).json({ message: "Invalid password" });
         }
 
+        // Return role and userId for frontend usage
         res.json({
           message: "Login successful",
-          userId: user.id
+          userId: user.id,
+          role: user.role,
+          email: user.email
         });
       }
     );

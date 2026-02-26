@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 localStorage.setItem("role", data.role);
 
                 setTimeout(() => {
-                    window.location.href = "dashboard.html";
+                    window.location.href = "home.html";
                 }, 1000);
 
             } else {
