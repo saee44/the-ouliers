@@ -13,12 +13,11 @@
         <nav class="container">
             <div class="logo" onclick="window.location.href='index.html'">EduEvent <span class="highlight">Portal</span></div>
             <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
+                <li><a href="home.html">Home</a></li>
                 <li><a href="event.html" class="active">Events</a></li>
-                <li><a href="#">Venues</a></li>
-                <li><a href="#">Resources</a></li>
             </ul>
-            <div class="nav-actions">
+            
+            <div class="nav-actions" id="auth-zone">
                 <button class="btn btn-text" onclick="window.location.href='login.html'">Sign In</button>
                 <button class="btn btn-primary dark" onclick="window.location.href='register.html'">Register</button>
             </div>
@@ -28,13 +27,10 @@
     <main class="container event-page-layout">
         <aside class="filter-sidebar animate-fade-in">
             <h3>Filters</h3>
-            
             <div class="filter-group">
                 <label>Category</label>
                 <div class="checkbox-item"><input type="checkbox" checked> <span>Academic</span></div>
                 <div class="checkbox-item"><input type="checkbox"> <span>Workshops</span></div>
-                <div class="checkbox-item"><input type="checkbox"> <span>Cultural</span></div>
-                <div class="checkbox-item"><input type="checkbox"> <span>Sports</span></div>
             </div>
 
             <div class="filter-group">
@@ -44,16 +40,8 @@
                     <option>CSE</option>
                     <option>AIDS</option>
                     <option>MECH</option>
-                    <option>CIVIL</option>
-                    <option>ENTC</option>
                 </select>
             </div>
-
-            <div class="filter-group">
-                <label>Date Range</label>
-                <input type="date" class="filter-input">
-            </div>
-
             <button class="btn btn-primary full-width">Apply Filters</button>
         </aside>
 
@@ -67,7 +55,7 @@
 
             <div class="events-grid">
                 <div class="event-card animate-fade-up">
-                    <div class="event-img science-bg">
+                    <div class="event-img science-bg" style="background: #eef2f3;">
                         <span class="tag tag-green">REGISTRATION OPEN</span>
                     </div>
                     <div class="event-info">
@@ -75,25 +63,12 @@
                         <h3>Annual Science Fair 2026</h3>
                         <p class="event-location">📍 Main University Hall</p>
                         <p class="event-desc">Showcase of the most innovative student projects and research papers.</p>
-                        <button class="btn btn-outline" onclick="window.location.href='register.html'">Register Now</button>
+                        <button class="btn btn-outline" onclick="window.location.href='event-details.html'">View Details</button>
                     </div>
                 </div>
 
                 <div class="event-card animate-fade-up">
-                    <div class="event-img alumni-bg">
-                        <span class="tag tag-dark">INVITE ONLY</span>
-                    </div>
-                    <div class="event-info">
-                        <small class="event-date">April 02, 2026</small>
-                        <h3>Global Alumni Meetup</h3>
-                        <p class="event-location">📍 Grand Ballroom</p>
-                        <p class="event-desc">Network with successful graduates from across the globe in this elite gathering.</p>
-                        <button class="btn btn-outline">View Details</button>
-                    </div>
-                </div>
-
-                <div class="event-card animate-fade-up">
-                    <div class="event-img tech-bg">
+                    <div class="event-img tech-bg" style="background: #001219;">
                         <span class="tag tag-orange">LIMITED SEATS</span>
                     </div>
                     <div class="event-info">
@@ -101,12 +76,39 @@
                         <h3>Tech Innovation Summit</h3>
                         <p class="event-location">📍 Innovation Lab</p>
                         <p class="event-desc">Exploring AI, Blockchain, and the future of engineering technology.</p>
-                        <button class="btn btn-outline" onclick="window.location.href='register.html'">Register Now</button>
+                        <button class="btn btn-outline" onclick="window.location.href='event-details.html'">View Details</button>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCNYDcUqgXKSe7fYCkbfOCNEz0XcIu8yHY",
+            authDomain: "outliers-af84b.firebaseapp.com",
+            projectId: "outliers-af84b",
+            storageBucket: "outliers-af84b.firebasestorage.app",
+            messagingSenderId: "205743069018",
+            appId: "1:205743069018:web:6a6a8dec5ba60b35c38563"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Check if user is logged in to change navbar
+        onAuthStateChanged(auth, (user) => {
+            const authZone = document.getElementById('auth-zone');
+            if (user) {
+                authZone.innerHTML = `
+                    <button class="btn btn-text" onclick="window.location.href='profile.html'">My Profile</button>
+                    <button class="btn btn-primary dark" onclick="window.location.href='home.html'">Dashboard</button>
+                `;
+            }
+        });
+    </script>
 </body>
 </html>

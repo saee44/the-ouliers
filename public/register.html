@@ -47,33 +47,65 @@
                 </div>
 
                 <div class="input-group">
-                    <label for="student-id">Student ID / Roll Number</label>
-                    <input type="text" id="student-id" placeholder="e.g. 2024-ST-001" required>
+                    <label for="semail">University Email Address</label>
+                    <input type="email" id="semail" placeholder="john.doe@university.edu" required>
                 </div>
 
                 <div class="input-group">
-                    <label for="email">University Email Address</label>
-                    <input type="email" id="email" placeholder="john.doe@university.edu" required>
-                </div>
-
-                <div class="input-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" placeholder="••••••••" required>
+                    <label for="spassword">Password</label>
+                    <input type="password" id="spassword" placeholder="••••••••" required>
                 </div>
 
                 <div class="terms">
                     <input type="checkbox" id="terms" required>
-                    <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                    <label for="terms">I agree to the Terms of Service</label>
                 </div>
 
-                <button type="submit" class="btn-submit animate-pulse">Create Account</button>
+                <button type="button" class="btn-submit animate-pulse" onclick="signup()">Create Account</button>
             </form>
 
             <div class="register-footer">
-                <p>Already have an account? <a href="#" class="highlight">Sign In</a></p>
+                <p>Already have an account? <a href="login.html" class="highlight">Sign In</a></p>
             </div>
         </div>
     </div>
 
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCNYDcUqgXKSe7fYCkbfOCNEz0XcIu8yHY",
+            authDomain: "outliers-af84b.firebaseapp.com",
+            projectId: "outliers-af84b",
+            storageBucket: "outliers-af84b.firebasestorage.app",
+            messagingSenderId: "205743069018",
+            appId: "1:205743069018:web:6a6a8dec5ba60b35c38563"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        window.signup = function () {
+            const email = document.getElementById("semail").value;
+            const password = document.getElementById("spassword").value;
+            const terms = document.getElementById("terms").checked;
+
+            if(!terms) {
+                alert("Please agree to the terms.");
+                return;
+            }
+
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    alert("Signup Successful!");
+                    // Redirect to Homepage after successful registration
+                    window.location.href = "home.html";
+                })
+                .catch((error) => {
+                    alert("Error: " + error.message);
+                });
+        };
+    </script>
 </body>
 </html>

@@ -6,12 +6,16 @@
     <title>Event Registration | EduEvent Portal</title>
     <link rel="stylesheet" href="event-reg.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Hide body until we verify the student is logged in */
+        body { display: none; }
+    </style>
 </head>
 <body>
 
     <div class="reg-wrapper">
         <div class="reg-card animate-slide-in">
-            <a href="event-details.html" class="back-btn">&larr; Back to Event Info</a>
+            <a href="home.html" class="back-btn">&larr; Back to Dashboard</a>
 
             <div class="reg-header">
                 <span class="event-badge">March 15, 2026</span>
@@ -19,7 +23,7 @@
                 <p>Please fill out the form below to secure your spot as a participant.</p>
             </div>
 
-            <form action="#" class="event-form">
+            <form id="registrationForm" class="event-form">
                 <div class="form-row">
                     <div class="input-group">
                         <label for="full-name">Full Name</label>
@@ -73,10 +77,53 @@
                     <label for="confirm">I confirm that the details provided are accurate and I will follow the event guidelines.</label>
                 </div>
 
-                <button type="submit" class="btn-submit">Confirm Registration &rarr;</button>
+                <button type="button" class="btn-submit" onclick="handleRegistration()">Confirm Registration &rarr;</button>
             </form>
         </div>
     </div>
 
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+
+        // Your Config
+        const firebaseConfig = {
+            apiKey: "AIzaSyCNYDcUqgXKSe7fYCkbfOCNEz0XcIu8yHY",
+            authDomain: "outliers-af84b.firebaseapp.com",
+            projectId: "outliers-af84b",
+            storageBucket: "outliers-af84b.firebasestorage.app",
+            messagingSenderId: "205743069018",
+            appId: "1:205743069018:web:6a6a8dec5ba60b35c38563"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Security Check
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                document.body.style.display = "block";
+            } else {
+                alert("Please login to register for events.");
+                window.location.href = "login.html";
+            }
+        });
+
+        // Submit Logic
+        window.handleRegistration = function() {
+            const prn = document.getElementById('prn').value;
+            const confirm = document.getElementById('confirm').checked;
+
+            if(!prn || !confirm) {
+                alert("Please fill in all required fields and accept the terms.");
+                return;
+            }
+
+            // Logic: Here you would usually save to Firestore. 
+            // For now, we simulate success and move to the Profile.
+            alert("Registration Successful! Redirecting to your profile...");
+            window.location.href = "profile.html";
+        }
+    </script>
 </body>
 </html>
