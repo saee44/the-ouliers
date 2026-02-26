@@ -117,39 +117,3 @@ app.post("/login", async (req, res) => {
 });
 
 
-app.post("/login", (req, res) => {
-  const { email, password } = req.body;
-
-  // Basic validation
-  if (!email || !password) {
-    return res.status(400).json({ message: "Email and password are required" });
-  }
-
-  // Find user by email
-  db.query("SELECT * FROM users WHERE email = ?", [email], async (err, results) => {
-    if (err) {
-      return res.status(500).json({ error: err.message });
-    }
-
-    if (results.length === 0) {
-      return res.status(400).json({ message: "Invalid email or password" });
-    }
-
-    const user = results[0];
-
-    // Compare password
-    const isMatch = await bcrypt.compare(password, user.password);
-
-    if (!isMatch) {
-      return res.status(400).json({ message: "Invalid email or password" });
-    }
-
-    // Successful login
-    res.status(200).json({
-      message: "Login successful",
-      userId: user.id,
-      role: user.role,
-      name: user.name
-    });
-  });
-});
