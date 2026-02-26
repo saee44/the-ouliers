@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community | EduEvent Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --bg-body: #f8fafc;
+            --sidebar-width: 260px;
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --text-main: #1e293b;
+            --slate-200: #e2e8f0;
+        }
+
+        body { 
+            background-color: var(--bg-body);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* --- Sidebar (Same as Dashboard) --- */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: #ffffff;
+            border-right: 1px solid var(--slate-200);
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+        .logo { font-size: 1.5rem; font-weight: 800; margin-bottom: 3rem; cursor: pointer; }
+        .highlight { color: var(--primary); }
+        .side-nav { list-style: none; padding: 0; flex-grow: 1; }
+        .side-nav li { margin-bottom: 0.5rem; }
+        .side-nav a {
+            display: flex; align-items: center; padding: 0.8rem 1rem;
+            color: #64748b; text-decoration: none; border-radius: 8px; font-weight: 500; transition: 0.3s;
+        }
+        .side-nav a:hover, .side-nav a.active { background: #f0fdf4; color: var(--primary); }
+
+        /* --- Main Community Layout --- */
+        .main-content {
+            flex-grow: 1;
+            display: grid;
+            grid-template-columns: 1fr 380px; /* Chat | Teammate Finder */
+            background: white;
+        }
+
+        /* --- Chat Section --- */
+        .chat-section {
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid var(--slate-200);
+            background: #fff;
+        }
+        .section-header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--slate-200);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #chat-window {
+            flex-grow: 1;
+            padding: 2rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            background-image: radial-gradient(#e2e8f0 0.5px, transparent 0.5px);
+            background-size: 20px 20px;
+        }
+        .message {
+            max-width: 70%;
+            padding: 12px 16px;
+            border-radius: 15px;
+            font-size: 0.95rem;
+            line-height: 1.4;
+            position: relative;
+        }
+        .msg-received { background: var(--slate-200); align-self: flex-start; border-bottom-left-radius: 2px; }
+        .msg-sent { background: var(--primary); color: white; align-self: flex-end; border-bottom-right-radius: 2px; }
+        .msg-user { font-size: 0.7rem; font-weight: 800; margin-bottom: 4px; display: block; opacity: 0.8; }
+
+        .chat-input-area {
+            padding: 1.5rem 2rem;
+            border-top: 1px solid var(--slate-200);
+            display: flex;
+            gap: 12px;
+        }
+        .chat-input-area input {
+            flex-grow: 1;
+            padding: 12px 18px;
+            border-radius: 12px;
+            border: 1px solid var(--slate-200);
+            outline: none;
+            font-family: inherit;
+        }
+
+        /* --- Teammate Finder Section --- */
+        .teammate-section {
+            background: var(--bg-body);
+            display: flex;
+            flex-direction: column;
+        }
+        .finder-header {
+            padding: 1.5rem;
+            background: white;
+            border-bottom: 1px solid var(--slate-200);
+        }
+        .request-list {
+            padding: 1.5rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .request-card {
+            background: white;
+            padding: 1.25rem;
+            border-radius: 16px;
+            border: 1px solid var(--slate-200);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .request-card h4 { margin: 0 0 5px 0; color: var(--text-main); }
+        .request-card p { font-size: 0.85rem; color: #64748b; margin-bottom: 10px; }
+        .tag {
+            font-size: 0.7rem;
+            padding: 4px 8px;
+            background: #f0fdf4;
+            color: var(--primary);
+            border-radius: 4px;
+            font-weight: 700;
+        }
+        .btn-connect {
+            width: 100%;
+            padding: 8px;
+            background: var(--slate-900);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-connect:hover { background: black; }
+
+        .btn-post {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="logo" onclick="window.location.href='index.html'">EduEvent <span class="highlight">Portal</span></div>
+        <ul class="side-nav">
+            <li><a href="home.html">🏠 Dashboard</a></li>
+            <li><a href="event.html">📅 All Events</a></li>
+            <li><a href="profile.html">👤 My Profile</a></li>
+            <li><a href="#">📩 Notifications</a></li>
+            <li><a href="community.html" class="active">🌐 Community</a></li>
+        </ul>
+        <button style="margin-top: auto; padding: 10px; border-radius: 8px; border: 1px solid #e2e8f0; background: none; cursor: pointer;">Logout</button>
+    </aside>
+
+    <main class="main-content">
+        <section class="chat-section">
+            <div class="section-header">
+                <div>
+                    <h2 style="margin:0">Global Chat</h2>
+                    <small style="color: #64748b;">Connected as <span id="current-user-display" class="highlight">...</span></small>
+                </div>
+                <i data-lucide="message-square" class="highlight"></i>
+            </div>
+            
+            <div id="chat-window">
+                <div class="message msg-received">
+                    <span class="msg-user">Admin</span>
+                    Welcome to the Global Chat! Discuss events or find friends here.
+                </div>
+            </div>
+
+            <div class="chat-input-area">
+                <input type="text" id="chat-input" placeholder="Type a message...">
+                <button class="btn-post" id="send-btn">Send</button>
+            </div>
+        </section>
+
+        <section class="teammate-section">
+            <div class="finder-header">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <h3 style="margin:0">Find Teammates</h3>
+                    <button class="btn-post" style="font-size: 0.8rem;">+ Post</button>
+                </div>
+                <p style="font-size: 0.8rem; color: #64748b; margin:0">Looking for a partner for a hackathon or sports?</p>
+            </div>
+
+            <div class="request-list">
+                <div class="request-card">
+                    <span class="tag">HACKATHON</span>
+                    <h4>React Developer Needed</h4>
+                    <p>Building a FinTech app for 'Build for Bharat'. Need someone good with Firebase.</p>
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                        <div style="width: 30px; height: 30px; background: #ddd; border-radius: 50%;"></div>
+                        <span style="font-size: 0.8rem; font-weight: 600;">Rahul S.</span>
+                    </div>
+                    <button class="btn-connect">Message Rahul</button>
+                </div>
+
+                <div class="request-card">
+                    <span class="tag" style="background: #fef2f2; color: #ef4444;">SPORTS</span>
+                    <h4>Need Bowler for Cricket</h4>
+                    <p>Short of one player for the inter-departmental match this Friday.</p>
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                        <div style="width: 30px; height: 30px; background: #ddd; border-radius: 50%;"></div>
+                        <span style="font-size: 0.8rem; font-weight: 600;">Arjun K.</span>
+                    </div>
+                    <button class="btn-connect">Message Arjun</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+
+        lucide.createIcons();
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCNYDcUqgXKSe7fYCkbfOCNEz0XcIu8yHY",
+            authDomain: "outliers-af84b.firebaseapp.com",
+            projectId: "outliers-af84b",
+            storageBucket: "outliers-af84b.firebasestorage.app",
+            messagingSenderId: "205743069018",
+            appId: "1:205743069018:web:6a6a8dec5ba60b35c38563"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        const chatWindow = document.getElementById('chat-window');
+        const chatInput = document.getElementById('chat-input');
+        const sendBtn = document.getElementById('send-btn');
+        let currentUserEmail = "";
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                currentUserEmail = user.email.split('@')[0];
+                document.getElementById('current-user-display').innerText = currentUserEmail;
+            } else {
+                window.location.href = "login.html";
+            }
+        });
+
+        // Simple local UI logic for sending messages
+        function sendMessage() {
+            const text = chatInput.value.trim();
+            if (text !== "") {
+                const msgDiv = document.createElement('div');
+                msgDiv.classList.add('message', 'msg-sent');
+                msgDiv.innerHTML = `<span class="msg-user">You</span>${text}`;
+                chatWindow.appendChild(msgDiv);
+                chatInput.value = "";
+                chatWindow.scrollTop = chatWindow.scrollHeight;
+
+                // Here you would normally use Firestore: 
+                // addDoc(collection(db, "messages"), { text, user: currentUserEmail, time: Date.now() });
+            }
+        }
+
+        sendBtn.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+    </script>
+</body>
+</html>

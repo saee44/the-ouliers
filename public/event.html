@@ -4,8 +4,122 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Explore Events | EduEvent Portal</title>
-    <link rel="stylesheet" href="event.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --primary: #10b981;
+            --slate-50: #f8fafc;
+            --slate-200: #e2e8f0;
+            --slate-500: #64748b;
+            --slate-800: #1e293b;
+            --slate-900: #0f172a;
+            
+            /* Category Colors */
+            --bg-academic: #3b82f6;
+            --bg-comp: #f59e0b;
+            --bg-sports: #ef4444;
+            --bg-cultural: #a855f7;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--slate-50);
+            color: var(--slate-900);
+        }
+
+        .container { max-width: 1440px; margin: 0 auto; padding: 0 2rem; }
+
+        /* --- Navbar --- */
+        header {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--slate-200);
+        }
+
+        nav { height: 75px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.4rem; font-weight: 800; cursor: pointer; }
+        .highlight { color: var(--primary); }
+
+        .nav-links { display: flex; list-style: none; gap: 2rem; padding: 0; }
+        .nav-links a { text-decoration: none; color: var(--slate-500); font-weight: 600; transition: 0.3s; }
+        .nav-links a.active, .nav-links a:hover { color: var(--primary); }
+
+        .btn { padding: 10px 20px; border-radius: 10px; font-weight: 700; cursor: pointer; border: none; transition: 0.3s; font-family: inherit; }
+        .btn-text { background: transparent; color: var(--slate-800); }
+        .btn-primary.dark { background: var(--slate-900); color: white; }
+
+        /* --- Grid Layout --- */
+        .event-page-layout {
+            margin-top: 3rem;
+            padding-bottom: 5rem;
+        }
+
+        .content-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2.5rem; }
+        .search-box { position: relative; width: 350px; }
+        .search-box input { width: 100%; padding: 12px 12px 12px 40px; border-radius: 12px; border: 1px solid var(--slate-200); font-family: inherit; }
+        .search-box i { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #94a3b8; }
+
+        /* Row of 4 Config */
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* Exactly 4 columns */
+            gap: 1.5rem;
+        }
+
+        /* --- Card Design --- */
+        .event-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--slate-200);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .event-card:hover { transform: translateY(-8px); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05); border-color: var(--primary); }
+
+        .event-img { 
+            height: 160px; 
+            background-size: cover; 
+            background-position: center; 
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .category-tag {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.65rem;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .event-info { padding: 1.25rem; flex-grow: 1; }
+        .event-date { color: var(--primary); font-weight: 800; font-size: 0.75rem; text-transform: uppercase; }
+        .event-info h3 { margin: 8px 0; font-size: 1.15rem; font-weight: 800; line-height: 1.3; height: 3rem; overflow: hidden; }
+        .event-location { color: var(--slate-500); font-size: 0.8rem; display: flex; align-items: center; gap: 4px; margin-bottom: 10px; }
+        .event-desc { font-size: 0.85rem; color: #64748b; line-height: 1.4; margin-bottom: 1.25rem; height: 2.5rem; overflow: hidden; }
+
+        .btn-view {
+            width: 100%; padding: 10px; border-radius: 10px; border: 1.5px solid var(--slate-200);
+            background: white; font-weight: 700; transition: 0.2s; cursor: pointer; font-size: 0.9rem;
+        }
+        .btn-view:hover { border-color: var(--primary); color: var(--primary); background: var(--slate-50); }
+
+        /* Responsive Fixes */
+        @media (max-width: 1200px) { .events-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 900px) { .events-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 600px) { .events-grid { grid-template-columns: 1fr; } }
+    </style>
 </head>
 <body>
 
@@ -16,7 +130,6 @@
                 <li><a href="home.html">Home</a></li>
                 <li><a href="event.html" class="active">Events</a></li>
             </ul>
-            
             <div class="nav-actions" id="auth-zone">
                 <button class="btn btn-text" onclick="window.location.href='login.html'">Sign In</button>
                 <button class="btn btn-primary dark" onclick="window.location.href='register.html'">Register</button>
@@ -25,67 +138,152 @@
     </header>
 
     <main class="container event-page-layout">
-        <aside class="filter-sidebar animate-fade-in">
-            <h3>Filters</h3>
-            <div class="filter-group">
-                <label>Category</label>
-                <div class="checkbox-item"><input type="checkbox" checked> <span>Academic</span></div>
-                <div class="checkbox-item"><input type="checkbox"> <span>Workshops</span></div>
+        <div class="content-header">
+            <h2>All Campus Events</h2>
+            <div class="search-box">
+                <i data-lucide="search"></i>
+                <input type="text" placeholder="Search competitions, sports...">
             </div>
+        </div>
 
-            <div class="filter-group">
-                <label>Department</label>
-                <select class="filter-select">
-                    <option>All Departments</option>
-                    <option>CSE</option>
-                    <option>AIDS</option>
-                    <option>MECH</option>
-                </select>
-            </div>
-            <button class="btn btn-primary full-width">Apply Filters</button>
-        </aside>
-
-        <section class="events-content">
-            <div class="content-header">
-                <h2>Upcoming Academic Events</h2>
-                <div class="search-box">
-                    <input type="text" placeholder="Search events by name...">
+        <div class="events-grid">
+            <div class="event-card">
+                <div class="event-img" style="background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=400&q=80');">
+                    <span class="category-tag" style="color: var(--bg-academic);">Academic</span>
+                </div>
+                <div class="event-info">
+                    <small class="event-date">Mar 15, 2026</small>
+                    <h3>Annual Science Fair</h3>
+                    <p class="event-location"><i data-lucide="map-pin" size="12"></i> Main Hall</p>
+                    <p class="event-desc">Discover groundbreaking student research projects.</p>
+                    <button class="btn-view" onclick="window.location.href='event-details.html'">View Details</button>
                 </div>
             </div>
 
-            <div class="events-grid">
-                <div class="event-card animate-fade-up">
-                    <div class="event-img science-bg" style="background: #eef2f3;">
-                        <span class="tag tag-green">REGISTRATION OPEN</span>
-                    </div>
-                    <div class="event-info">
-                        <small class="event-date">March 15, 2026</small>
-                        <h3>Annual Science Fair 2026</h3>
-                        <p class="event-location">📍 Main University Hall</p>
-                        <p class="event-desc">Showcase of the most innovative student projects and research papers.</p>
-                        <button class="btn btn-outline" onclick="window.location.href='event-details.html'">View Details</button>
-                    </div>
+            <div class="event-card">
+                <div class="event-img" style="background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1504384308090-c89e1245a6f9?auto=format&fit=crop&w=400&q=80');">
+                    <span class="category-tag" style="color: var(--bg-comp);">Competition</span>
                 </div>
-
-                <div class="event-card animate-fade-up">
-                    <div class="event-img tech-bg" style="background: #001219;">
-                        <span class="tag tag-orange">LIMITED SEATS</span>
-                    </div>
-                    <div class="event-info">
-                        <small class="event-date">April 20, 2026</small>
-                        <h3>Tech Innovation Summit</h3>
-                        <p class="event-location">📍 Innovation Lab</p>
-                        <p class="event-desc">Exploring AI, Blockchain, and the future of engineering technology.</p>
-                        <button class="btn btn-outline" onclick="window.location.href='event-details.html'">View Details</button>
-                    </div>
+                <div class="event-info">
+                    <small class="event-date">Mar 20, 2026</small>
+                    <h3>Global Hackathon</h3>
+                    <p class="event-location"><i data-lucide="map-pin" size="12"></i> IT Center</p>
+                    <p class="event-desc">24 hours of coding to solve climate issues.</p>
+                    <button class="btn-view" onclick="window.location.href='event-details.html'">View Details</button>
                 </div>
             </div>
-        </section>
+
+            <div class="event-card">
+                <div class="event-img" style="background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1541252260730-0412e8e2108e?auto=format&fit=crop&w=400&q=80');">
+                    <span class="category-tag" style="color: var(--bg-sports);">Sports</span>
+                </div>
+                <div class="event-info">
+                    <small class="event-date">Mar 25, 2026</small>
+                    <h3>Cricket Championship</h3>
+                    <p class="event-location"><i data-lucide="map-pin" size="12"></i> Sports Ground</p>
+                    <p class="event-desc">Inter-departmental cricket tournament finals.</p>
+                    <button class="btn-view" onclick="window.location.href='event-details.html'">View Details</button>
+                </div>
+            </div>
+
+            <div class="event-card">
+                <div class="event-img" style="background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1514525253361-bee8a19740c1?auto=format&fit=crop&w=400&q=80');">
+                    <span class="category-tag" style="color: var(--bg-cultural);">Cultural</span>
+                </div>
+                <div class="event-info">
+                    <small class="event-date">Apr 02, 2026</small>
+                    <h3>Musical Gala Night</h3>
+                    <p class="event-location"><i data-lucide="map-pin" size="12"></i> OAT Theater</p>
+                    <p class="event-desc">A night of mesmerizing musical performances.</p>
+                    <button class="btn-view" onclick="window.location.href='event-details.html'">View Details</button>
+                </div>
+            </div>
+
+            <div class="event-card">
+                <div class="event-img" style="background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=400&q=80');">
+                    <span class="category-tag" style="color: var(--bg-academic);">Academic</span>
+                </div>
+                <div class="event-info">
+                    <small class="event-date">Apr 05, 2026</small>
+                    <h3>AI & Ethics Seminar</h3>
+                    <p class="event-location"><i data-lucide="map-pin" size="12"></i> Seminar Room B</p>
+                    <p class="event-desc">Discussing the social impact of modern AI.</p>
+                    <button class="btn-view" onclick="window.location.href='event-details.html'">View Details</button>
+                </div>
+            </div>
+
+            <div class="event-card">
+                <div class="event-img" style="background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=400&q=80');">
+                    <span class="category-tag" style="color: var(--bg-comp);">Competition</span>
+                </div>
+                <div class="event-info">
+                    <small class="event-date">Apr 10, 2026</small>
+                    <h3>E-Sports Arena</h3>
+                    <p class="event-location"><i data-lucide="map-pin" size="12"></i> Gaming Hub</p>
+                    <p class="event-desc">Valorant and FIFA inter-college tournament.</p>
+                    <button class="btn-view" onclick="window.location.href='event-details.html'">View Details</button>
+                </div>
+            </div>
+
+            <div class="event-card">
+                <div class="event-img" style="background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=400&q=80');">
+                    <span class="category-tag" style="color: var(--bg-cultural);">Cultural</span>
+                </div>
+                <div class="event-info">
+                    <small class="event-date">Apr 15, 2026</small>
+                    <h3>Drama Workshop</h3>
+                    <p class="event-location"><i data-lucide="map-pin" size="12"></i> Arts Room</p>
+                    <p class="event-desc">Master the art of expression and acting.</p>
+                    <button class="btn-view" onclick="window.location.href='event-details.html'">View Details</button>
+                </div>
+            </div>
+
+            <div class="event-card">
+                <div class="event-img" style="background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1526676037777-05a232554f77?auto=format&fit=crop&w=400&q=80');">
+                    <span class="category-tag" style="color: var(--bg-sports);">Sports</span>
+                </div>
+                <div class="event-info">
+                    <small class="event-date">Apr 20, 2026</small>
+                    <h3>Basketball League</h3>
+                    <p class="event-location"><i data-lucide="map-pin" size="12"></i> Indoor Court</p>
+                    <p class="event-desc">Competitive 3v3 basketball matches.</p>
+                    <button class="btn-view" onclick="window.location.href='event-details.html'">View Details</button>
+                </div>
+            </div>
+
+            <div class="event-card">
+                <div class="event-img" style="background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1551818255-e6e10975bc17?auto=format&fit=crop&w=400&q=80');">
+                    <span class="category-tag" style="color: var(--bg-comp);">Competition</span>
+                </div>
+                <div class="event-info">
+                    <small class="event-date">Apr 25, 2026</small>
+                    <h3>Business Pitch Deck</h3>
+                    <p class="event-location"><i data-lucide="map-pin" size="12"></i> Incubation Lab</p>
+                    <p class="event-desc">Pitch your startup idea to top investors.</p>
+                    <button class="btn-view" onclick="window.location.href='event-details.html'">View Details</button>
+                </div>
+            </div>
+
+            <div class="event-card">
+                <div class="event-img" style="background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=400&q=80');">
+                    <span class="category-tag" style="color: var(--bg-cultural);">Cultural</span>
+                </div>
+                <div class="event-info">
+                    <small class="event-date">May 01, 2026</small>
+                    <h3>Photography Contest</h3>
+                    <p class="event-location"><i data-lucide="map-pin" size="12"></i> Campus Wide</p>
+                    <p class="event-desc">Capture the essence of campus life.</p>
+                    <button class="btn-view" onclick="window.location.href='event-details.html'">View Details</button>
+                </div>
+            </div>
+        </div>
     </main>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+
+        lucide.createIcons();
 
         const firebaseConfig = {
             apiKey: "AIzaSyCNYDcUqgXKSe7fYCkbfOCNEz0XcIu8yHY",
@@ -99,7 +297,6 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
 
-        // Check if user is logged in to change navbar
         onAuthStateChanged(auth, (user) => {
             const authZone = document.getElementById('auth-zone');
             if (user) {
@@ -107,6 +304,7 @@
                     <button class="btn btn-text" onclick="window.location.href='profile.html'">My Profile</button>
                     <button class="btn btn-primary dark" onclick="window.location.href='home.html'">Dashboard</button>
                 `;
+                lucide.createIcons();
             }
         });
     </script>

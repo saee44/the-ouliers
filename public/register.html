@@ -5,64 +5,227 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Registration | EduEvent Portal</title>
     <link rel="stylesheet" href="register.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --slate-900: #0f172a;
+            --slate-700: #334155;
+            --slate-500: #64748b;
+            --slate-100: #f1f5f9;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .split-container { display: flex; width: 100%; }
+
+        /* Left Side Visual */
+        .visual-side {
+            flex: 1;
+            background: var(--slate-900);
+            padding: 4rem;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .visual-side::after {
+            content: "";
+            position: absolute;
+            bottom: -10%;
+            left: -10%;
+            width: 300px;
+            height: 300px;
+            background: var(--primary);
+            filter: blur(80px);
+            opacity: 0.15;
+            border-radius: 50%;
+        }
+
+        .benefit-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 2rem;
+            align-items: center;
+        }
+        .icon-box {
+            background: rgba(255,255,255,0.1);
+            padding: 10px;
+            border-radius: 12px;
+            color: var(--primary);
+        }
+
+        /* Right Side Form */
+        .form-side {
+            flex: 1.2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 2rem;
+            background: #f8fafc;
+        }
+
+        .register-card {
+            width: 100%;
+            max-width: 480px;
+            background: white;
+            padding: 2.5rem;
+            border-radius: 24px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--slate-100);
+        }
+
+        .logo { font-size: 1.4rem; font-weight: 800; margin-bottom: 1.5rem; letter-spacing: -0.5px; }
+        .highlight { color: var(--primary); }
+
+        h1 { font-size: 1.75rem; font-weight: 800; color: var(--slate-900); margin: 0 0 0.5rem; }
+        .subtitle { color: var(--slate-500); font-size: 0.95rem; margin-bottom: 2rem; }
+
+        .input-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .input-group { margin-bottom: 1.25rem; }
+        .full-width { grid-column: span 2; }
+
+        label { display: block; font-size: 0.8rem; font-weight: 700; color: var(--slate-700); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+        
+        input, select {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: 0.3s;
+            background: white;
+            box-sizing: border-box;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+        }
+
+        .terms {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 1.5rem 0;
+            font-size: 0.85rem;
+            color: var(--slate-500);
+        }
+
+        .btn-submit {
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-submit:hover { background: var(--primary-dark); transform: translateY(-1px); box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.3); }
+
+        .footer-text { text-align: center; margin-top: 1.5rem; font-size: 0.9rem; color: var(--slate-500); }
+
+        @media (max-width: 900px) {
+            .visual-side { display: none; }
+            .input-grid { grid-template-columns: 1fr; }
+            .full-width { grid-column: span 1; }
+        }
+    </style>
 </head>
-<body class="bg-register">
+<body>
 
-    <div class="register-container animate-fade-up">
-        <div class="register-card">
-            <div class="register-header">
-                <div class="logo">EduEvent <span class="highlight">Portal</span></div>
-                <h1>Student Registration</h1>
-                <p>Join the community to access exclusive academic events.</p>
+    <div class="split-container">
+        <div class="visual-side">
+            <div class="logo" style="color: white; position: absolute; top: 4rem;">EduEvent <span class="highlight">Portal</span></div>
+            
+            <div style="margin-bottom: 3rem;">
+                <h2 style="font-size: 2.2rem; font-weight: 800; line-height: 1.2;">Start your <br><span class="highlight">Academic Journey</span> here.</h2>
+                <p style="color: #94a3b8; font-size: 1.1rem;">Join 1000+ students managing their college life smarter.</p>
             </div>
 
-            <div class="info-banner">
-                <div class="banner-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><line x1="19" y1="8" x2="19" y2="14"></line><line x1="22" y1="11" x2="16" y2="11"></line></svg>
-                </div>
-                <div class="banner-text">
-                    <h3>Create Your Account</h3>
-                    <p>Enter your institutional details to verify your status.</p>
+            <div class="benefit-item">
+                <div class="icon-box"><i data-lucide="calendar-check"></i></div>
+                <div>
+                    <h4 style="margin:0">Instant Registration</h4>
+                    <p style="margin:0; font-size: 0.85rem; color: #94a3b8;">One-click signups for all campus events.</p>
                 </div>
             </div>
 
-            <form id="signupForm" class="register-form">
-                <div class="input-group">
-                    <label for="full-name">Full Name</label>
-                    <input type="text" id="full-name" placeholder="Enter your full name" required>
+            <div class="benefit-item">
+                <div class="icon-box"><i data-lucide="award"></i></div>
+                <div>
+                    <h4 style="margin:0">Digital Certificates</h4>
+                    <p style="margin:0; font-size: 0.85rem; color: #94a3b8;">Automatically receive certificates upon completion.</p>
                 </div>
+            </div>
+        </div>
 
-                <div class="input-group">
-                    <label for="department">Department</label>
-                    <select id="department" required>
-                        <option value="" disabled selected>Select Department</option>
-                        <option value="cse">Computer Science (CSE)</option>
-                        <option value="aids">AI & Data Science (AIDS)</option>
-                        <option value="mech">Mechanical Engineering (MECH)</option>
-                    </select>
-                </div>
+        <div class="form-side">
+            <div class="register-card">
+                <h1>Create Account</h1>
+                <p class="subtitle">Join the EduEvent community today</p>
 
-                <div class="input-group">
-                    <label for="semail">University Email Address</label>
-                    <input type="email" id="semail" placeholder="john.doe@university.edu" required>
-                </div>
+                <form id="signupForm" class="input-grid">
+                    <div class="input-group full-width">
+                        <label for="full-name">Full Name</label>
+                        <input type="text" id="full-name" placeholder="Alex Rivers" required>
+                    </div>
 
-                <div class="input-group">
-                    <label for="spassword">Password</label>
-                    <input type="password" id="spassword" placeholder="••••••••" required>
-                </div>
+                    <div class="input-group full-width">
+                        <label for="department">Department</label>
+                        <select id="department" required>
+                            <option value="" disabled selected>Select your branch</option>
+                            <option value="cse">Computer Science (CSE)</option>
+                            <option value="aids">AI & Data Science (AIDS)</option>
+                            <option value="mech">Mechanical Engineering (MECH)</option>
+                        </select>
+                    </div>
 
-                <div class="terms">
-                    <input type="checkbox" id="terms" required>
-                    <label for="terms">I agree to the Terms of Service</label>
-                </div>
+                    <div class="input-group full-width">
+                        <label for="semail">University Email</label>
+                        <input type="email" id="semail" placeholder="alex@kbp.edu" required>
+                    </div>
 
-                <button type="button" class="btn-submit animate-pulse" onclick="signup()">Create Account</button>
-            </form>
+                    <div class="input-group full-width">
+                        <label for="spassword">Password</label>
+                        <input type="password" id="spassword" placeholder="••••••••" required>
+                    </div>
 
-            <div class="register-footer">
-                <p>Already have an account? <a href="login.html" class="highlight">Sign In</a></p>
+                    <div class="terms full-width">
+                        <input type="checkbox" id="terms" required style="width: auto;">
+                        <label for="terms" style="text-transform: none; font-weight: 500; margin: 0;">I agree to the <span class="highlight">Terms & Conditions</span></label>
+                    </div>
+
+                    <div class="full-width">
+                        <button type="button" class="btn-submit" onclick="signup()">Create Account</button>
+                    </div>
+                </form>
+
+                <p class="footer-text">
+                    Already have an account? <a href="login.html" class="highlight" style="font-weight: 700; text-decoration: none;">Sign In</a>
+                </p>
             </div>
         </div>
     </div>
@@ -70,6 +233,9 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
         import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+
+        // Initialize Icons
+        lucide.createIcons();
 
         const firebaseConfig = {
             apiKey: "AIzaSyCNYDcUqgXKSe7fYCkbfOCNEz0XcIu8yHY",
@@ -88,6 +254,11 @@
             const password = document.getElementById("spassword").value;
             const terms = document.getElementById("terms").checked;
 
+            if(!email || !password) {
+                alert("Please fill in all details.");
+                return;
+            }
+
             if(!terms) {
                 alert("Please agree to the terms.");
                 return;
@@ -96,7 +267,6 @@
             createUserWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
                     alert("Signup Successful!");
-                    // Redirect to Homepage after successful registration
                     window.location.href = "home.html";
                 })
                 .catch((error) => {

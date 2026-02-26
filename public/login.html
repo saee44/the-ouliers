@@ -5,41 +5,192 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Login | EduEvent Portal</title>
     <link rel="stylesheet" href="register.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --slate-900: #0f172a;
+            --slate-700: #334155;
+            --slate-500: #64748b;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+            display: flex;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Split Screen Layout */
+        .login-wrapper {
+            display: flex;
+            width: 100%;
+        }
+
+        /* Left Side: Visual/Branding */
+        .login-visual {
+            flex: 1;
+            background: var(--slate-900);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 4rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-visual::before {
+            content: "";
+            position: absolute;
+            top: -10%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+            opacity: 0.2;
+            filter: blur(60px);
+        }
+
+        .visual-content { position: relative; z-index: 2; }
+        .visual-content h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; }
+        .visual-content p { font-size: 1.1rem; color: #94a3b8; line-height: 1.6; max-width: 400px; }
+
+        /* Right Side: Form */
+        .login-section {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            background: #f8fafc;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 420px;
+            background: white;
+            padding: 2.5rem;
+            border-radius: 24px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            border: 1px solid #f1f5f9;
+        }
+
+        .logo { font-size: 1.5rem; font-weight: 800; margin-bottom: 2rem; letter-spacing: -0.5px; }
+        .highlight { color: var(--primary); }
+
+        .login-header h1 { font-size: 1.8rem; font-weight: 800; color: var(--slate-900); margin-bottom: 0.5rem; }
+        .login-header p { color: var(--slate-500); margin-bottom: 2rem; font-size: 0.95rem; }
+
+        /* Form Controls */
+        .input-group { margin-bottom: 1.5rem; }
+        .input-group label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--slate-700); margin-bottom: 8px; }
+        
+        .input-wrapper { position: relative; }
+        .input-wrapper i { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #94a3b8; transition: 0.3s; }
+
+        input {
+            width: 100%;
+            padding: 12px 14px 12px 42px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            box-sizing: border-box;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+        }
+
+        input:focus + i { color: var(--primary); }
+
+        .btn-submit {
+            width: 100%;
+            background: var(--slate-900);
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 1rem;
+        }
+
+        .btn-submit:hover { background: #000; transform: translateY(-1px); }
+
+        .toggle-text { text-align: center; margin-top: 1.5rem; font-size: 0.9rem; color: var(--slate-500); }
+        .footer-link { display: block; text-align: center; margin-top: 2rem; font-size: 0.85rem; color: var(--slate-500); text-decoration: none; transition: 0.2s; }
+        .footer-link:hover { color: var(--slate-900); }
+
+        @media (max-width: 900px) {
+            .login-visual { display: none; }
+        }
+    </style>
 </head>
-<body class="bg-register">
+<body>
 
-    <div class="register-container animate-fade-up">
-        <div class="register-card">
-            <div class="register-header">
-                <div class="logo">EduEvent <span class="highlight">Portal</span></div>
-                <h1>Welcome Back</h1>
-                <p>Login to your KBP College student account.</p>
+    <div class="login-wrapper">
+        <div class="login-visual">
+            <div class="visual-content">
+                <div class="logo" style="color: white;">EduEvent <span class="highlight">Portal</span></div>
+                <h2>Your Gateway to College Excellence.</h2>
+                <p>Access exclusive workshops, seminars, and hackathons hosted by KBP College. Stay ahead in your academic journey.</p>
             </div>
+        </div>
 
-            <div class="login-form">
-                <div class="input-group">
-                    <label for="email">University Email</label>
-                    <input type="email" id="email" placeholder="name@kbp.edu" required>
+        <div class="login-section">
+            <div class="login-card">
+                <div class="login-header">
+                    <h1>Welcome Back</h1>
+                    <p>Enter your details to access your account</p>
                 </div>
 
-                <div class="input-group">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <label for="password">Password</label>
-                        <a href="#" class="highlight" style="font-size: 0.75rem; text-decoration: none;">Forgot?</a>
+                <div class="login-form">
+                    <div class="input-group">
+                        <label for="email">University Email</label>
+                        <div class="input-wrapper">
+                            <i data-lucide="mail" style="width: 18px;"></i>
+                            <input type="email" id="email" placeholder="name@kbp.edu" required>
+                        </div>
                     </div>
-                    <input type="password" id="password" placeholder="••••••••" required>
+
+                    <div class="input-group">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <label for="password" style="margin-bottom: 0;">Password</label>
+                            <a href="#" class="highlight" style="font-size: 0.75rem; text-decoration: none; font-weight: 700;">Forgot?</a>
+                        </div>
+                        <div class="input-wrapper">
+                            <i data-lucide="lock" style="width: 18px;"></i>
+                            <input type="password" id="password" placeholder="••••••••" required>
+                        </div>
+                    </div>
+
+                    <button class="btn-submit" onclick="login()">
+                        Sign In <i data-lucide="arrow-right" style="width: 18px;"></i>
+                    </button>
+                    
+                    <p class="toggle-text">
+                        New student? <a href="register.html" style="color: var(--primary); font-weight: 700; text-decoration: none;">Create an account</a>
+                    </p>
+
+                    <a href="index.html" class="footer-link">
+                         &larr; Back to Home
+                    </a>
                 </div>
-
-                <button class="btn-submit" onclick="login()">Sign In &rarr;</button>
-                
-                <p class="toggle-text">
-                    New to the portal? <a href="register.html" style="color: var(--primary); font-weight: 700; text-decoration: none;">Create an account</a>
-                </p>
-            </div>
-
-            <div class="register-footer">
-                <a href="index.html" style="text-decoration: none; color: #64748b; font-size: 0.85rem;">&larr; Back to Home</a>
             </div>
         </div>
     </div>
@@ -47,6 +198,9 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+
+        // Initialize Lucide Icons
+        lucide.createIcons();
 
         const firebaseConfig = {
             apiKey: "AIzaSyCNYDcUqgXKSe7fYCkbfOCNEz0XcIu8yHY",
@@ -61,13 +215,24 @@
         const auth = getAuth(app);
 
         window.login = function () {
-            const email = document.getElementById("email").value;
-            const password = document.getElementById("password").value;
+            const emailInput = document.getElementById("email").value;
+            const passwordInput = document.getElementById("password").value;
 
-            signInWithEmailAndPassword(auth, email, password)
-                .then(() => {
-                    // Redirecting to HOME page as per your flow requirements
-                    window.location.href = "home.html"; 
+            if(!emailInput || !passwordInput) {
+                alert("Please fill in all fields.");
+                return;
+            }
+
+            signInWithEmailAndPassword(auth, emailInput, passwordInput)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+
+                    // --- ADMIN ROLE CHECK ---
+                    if (user.email === 'admin@kbp.edu' && passwordInput === '114477') {
+                        window.location.href = "admin-home.html"; 
+                    } else {
+                        window.location.href = "home.html"; 
+                    }
                 })
                 .catch(err => {
                     alert("Login Failed: " + err.message);
