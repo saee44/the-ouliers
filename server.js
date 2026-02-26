@@ -2,6 +2,7 @@
 console.log("server started ")
 const express = require("express");
 const cors = require("cors");
+const bcrypt = require("bcrypt");
 const db = require("./db");
 
 const app = express();
@@ -17,6 +18,7 @@ app.listen(3000, () => {
 
 
 app.post("/signup", async (req, res) => {
+  
   try {
     const { name, email, password, student_id, department } = req.body;
 
