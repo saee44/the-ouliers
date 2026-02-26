@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | EduEvent Portal</title>
+    <link rel="stylesheet" href="admin.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="admin-container">
+        <aside class="sidebar">
+            <div class="logo">EduEvent <span class="highlight">Admin</span></div>
+            <nav class="side-nav">
+                <a href="#" class="active">📊 Dashboard</a>
+                <a href="event.html">📅 Manage Events</a>
+                <a href="#">👥 Student List</a>
+                <a href="#">🏛️ Venues</a>
+                <a href="#">⚙️ Settings</a>
+            </nav>
+            <div class="sidebar-footer">
+                <button class="btn-logout" onclick="window.location.href='login.html'">Logout</button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="content-header">
+                <h1>Dashboard Overview</h1>
+                <button class="btn-add" onclick="alert('Open Create Event Modal')">+ Create New Event</button>
+            </header>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <p>Total Events</p>
+                    <h3>24</h3>
+                    <span class="trend pos">+12% this month</span>
+                </div>
+                <div class="stat-card">
+                    <p>Total Registrations</p>
+                    <h3>1,240</h3>
+                    <span class="trend pos">+5% this week</span>
+                </div>
+                <div class="stat-card">
+                    <p>Pending Approvals</p>
+                    <h3>08</h3>
+                    <span class="trend neg">Action required</span>
+                </div>
+            </div>
+
+            <section class="table-container">
+                <div class="table-header">
+                    <h2>Recent Event Registrations</h2>
+                    <input type="text" placeholder="Search students..." class="table-search">
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Student Name</th>
+                            <th>Event</th>
+                            <th>Department</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Amit Sharma</strong></td>
+                            <td>Science Fair 2024</td>
+                            <td>CSE</td>
+                            <td><span class="badge confirmed">Confirmed</span></td>
+                            <td><button class="btn-edit">Edit</button></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Snehal Patil</strong></td>
+                            <td>Tech Summit</td>
+                            <td>AIDS</td>
+                            <td><span class="badge pending">Pending</span></td>
+                            <td><button class="btn-edit">Edit</button></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Rahul Vichare</strong></td>
+                            <td>Alumni Meet</td>
+                            <td>MECH</td>
+                            <td><span class="badge confirmed">Confirmed</span></td>
+                            <td><button class="btn-edit">Edit</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+</body>
+</html>

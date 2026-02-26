@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Registrations | Admin Portal</title>
+    <link rel="stylesheet" href="srmanage.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="manage-container">
+        <header class="manage-header">
+            <div class="header-left">
+                <a href="admin.html" class="back-link">← Dashboard</a>
+                <h1>Manage Registrations</h1>
+            </div>
+            <div class="header-actions">
+                <button class="btn btn-export">Export CSV</button>
+                <div class="user-pill">Admin Mode</div>
+            </div>
+        </header>
+
+        <section class="filter-section">
+            <div class="search-wrapper">
+                <input type="text" placeholder="Search by PRN or Name..." id="tableSearch">
+            </div>
+            <div class="filter-dropdowns">
+                <select>
+                    <option>All Departments</option>
+                    <option>CSE</option>
+                    <option>AIDS</option>
+                    <option>MECH</option>
+                </select>
+                <select>
+                    <option>All Events</option>
+                    <option>Science Fair</option>
+                    <option>Tech Summit</option>
+                </select>
+            </div>
+        </section>
+
+        <div class="table-wrapper">
+            <table class="manage-table">
+                <thead>
+                    <tr>
+                        <th>Student Name</th>
+                        <th>PRN Number</th>
+                        <th>Department</th>
+                        <th>Registered Event</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Rahul Deshmukh</strong></td>
+                        <td>2024CS001</td>
+                        <td>CSE</td>
+                        <td>Science Fair 2026</td>
+                        <td><span class="status-badge approved">Approved</span></td>
+                        <td class="action-cells">
+                            <button class="action-btn view">View</button>
+                            <button class="action-btn delete">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Sneha Patil</strong></td>
+                        <td>2024AD045</td>
+                        <td>AIDS</td>
+                        <td>Tech Innovation</td>
+                        <td><span class="status-badge pending">Pending</span></td>
+                        <td class="action-cells">
+                            <button class="action-btn approve">Approve</button>
+                            <button class="action-btn delete">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>Amit Shinde</strong></td>
+                        <td>2024ME012</td>
+                        <td>MECH</td>
+                        <td>Alumni Meet</td>
+                        <td><span class="status-badge approved">Approved</span></td>
+                        <td class="action-cells">
+                            <button class="action-btn view">View</button>
+                            <button class="action-btn delete">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <footer class="table-footer">
+            <p>Showing 3 of 150 student registrations</p>
+            <div class="pagination">
+                <button disabled>Prev</button>
+                <button class="active">1</button>
+                <button>2</button>
+                <button>Next</button>
+            </div>
+        </footer>
+    </div>
+
+</body>
+</html>
