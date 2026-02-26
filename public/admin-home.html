@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | EduEvent Portal</title>
+    <link rel="stylesheet" href="admin.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #10b981;
+            --bg-body: #f8fafc;
+            --sidebar-width: 260px;
+        }
+
+        body {
+            display: none; /* Page remains hidden until Admin check passes */
+            background-color: var(--bg-body);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+        }
+
+        .admin-container { display: flex; width: 100%; }
+
+        /* Sidebar UI */
+        .sidebar {
+            width: var(--sidebar-width);
+            background: #0f172a;
+            color: white;
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+        }
+
+        .sidebar .logo { font-size: 1.5rem; font-weight: 800; margin-bottom: 3rem; }
+        .sidebar .highlight { color: var(--primary); }
+
+        .side-nav { list-style: none; padding: 0; flex-grow: 1; }
+        .side-nav a {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem 1rem;
+            color: #94a3b8;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            transition: 0.3s;
+        }
+        .side-nav a.active { background: rgba(16, 185, 129, 0.1); color: var(--primary); }
+        .side-nav a:hover { color: white; background: rgba(255,255,255,0.05); }
+
+        /* Main Content UI */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            flex-grow: 1;
+            padding: 2rem 3rem;
+        }
+
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .btn-add {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-add:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3); }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 20px;
+            border: 1px solid #e2e8f0;
+        }
+        .stat-card h3 { font-size: 1.8rem; margin: 10px 0; color: #0f172a; }
+
+        /* Table UI */
+        .table-container {
+            background: white;
+            border-radius: 20px;
+            border: 1px solid #e2e8f0;
+            padding: 1.5rem;
+        }
+        .table-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+        .table-search { padding: 10px 15px; border-radius: 10px; border: 1px solid #e2e8f0; width: 250px; outline: none; }
+        .table-search:focus { border-color: var(--primary); }
+
+        table { width: 100%; border-collapse: collapse; }
+        th { text-align: left; padding: 15px; color: #64748b; font-size: 0.85rem; border-bottom: 1px solid #f1f5f9; }
+        td { padding: 15px; border-bottom: 1px solid #f1f5f9; font-size: 0.9rem; color: #1e293b; }
+
+        .badge { padding: 5px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: 700; }
+        .badge.confirmed { background: #dcfce7; color: #166534; }
+        .badge.pending { background: #fef3c7; color: #92400e; }
+    </style>
+</head>
+<body>
+
+    <div class="admin-container">
+        <aside class="sidebar">
+            <div class="logo">EduEvent <span class="highlight">Admin</span></div>
+            <nav class="side-nav">
+                <a href="admin-home.html" class="active">📊 Dashboard</a>
+                <a href="create-event.html">📅 Manage Events</a>
+                <a href="#">👥 Student List</a>
+                <a href="#">🏛️ Venues</a>
+            </nav>
+            <button onclick="logout()" style="background: #334155; color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: 600;">Logout</button>
+        </aside>
+
+        <main class="main-content">
+            <header class="content-header">
+                <div>
+                    <h1 style="margin: 0;">Dashboard Overview</h1>
+                    <p style="color: #64748b; margin-top: 5px;">Welcome back, Administrator.</p>
+                </div>
+                <button class="btn-add" onclick="window.location.href='create-event.html'">+ Create New Event</button>
+            </header>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <p style="color: #64748b; font-weight: 600; margin: 0;">Total Events</p>
+                    <h3>24</h3>
+                    <span style="color: var(--primary); font-size: 0.8rem; font-weight: 700;">+12% this month</span>
+                </div>
+                <div class="stat-card">
+                    <p style="color: #64748b; font-weight: 600; margin: 0;">Registrations</p>
+                    <h3>1,240</h3>
+                    <span style="color: var(--primary); font-size: 0.8rem; font-weight: 700;">+5% this week</span>
+                </div>
+                <div class="stat-card">
+                    <p style="color: #64748b; font-weight: 600; margin: 0;">Pending</p>
+                    <h3>08</h3>
+                    <span style="color: #ef4444; font-size: 0.8rem; font-weight: 700;">Action required</span>
+                </div>
+            </div>
+
+            <section class="table-container">
+                <div class="table-header">
+                    <h2>Recent Registrations</h2>
+                    <input type="text" id="studentSearch" placeholder="Search by student name..." class="table-search">
+                </div>
+                <table id="regTable">
+                    <thead>
+                        <tr>
+                            <th>Student Name</th>
+                            <th>Event</th>
+                            <th>Department</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Amit Sharma</strong></td>
+                            <td>Science Fair 2026</td>
+                            <td>CSE</td>
+                            <td><span class="badge confirmed">Confirmed</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Snehal Patil</strong></td>
+                            <td>Tech Summit</td>
+                            <td>AIDS</td>
+                            <td><span class="badge pending">Pending</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Rahul Vichare</strong></td>
+                            <td>Alumni Meet</td>
+                            <td>MECH</td>
+                            <td><span class="badge confirmed">Confirmed</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+
+        // Firebase Configuration (Matching your Outliers Project)
+        const firebaseConfig = {
+            apiKey: "AIzaSyCNYDcUqgXKSe7fYCkbfOCNEz0XcIu8yHY",
+            authDomain: "outliers-af84b.firebaseapp.com",
+            projectId: "outliers-af84b",
+            appId: "1:205743069018:web:6a6a8dec5ba60b35c38563"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // --- ADMIN AUTH GUARD ---
+        // Prevents students or logged-out users from seeing this page
+        onAuthStateChanged(auth, (user) => {
+            if (user && user.email === 'admin@kbp.edu') {
+                document.body.style.display = "block"; // Show page only if admin
+            } else {
+                alert("Unauthorized! Access Denied.");
+                window.location.href = "login.html";
+            }
+        });
+
+        // --- SEARCH FILTER LOGIC ---
+        const searchInput = document.getElementById('studentSearch');
+        searchInput.addEventListener('keyup', function() {
+            const filter = searchInput.value.toLowerCase();
+            const rows = document.querySelectorAll('#regTable tbody tr');
+            
+            rows.forEach(row => {
+                const name = row.cells[0].textContent.toLowerCase();
+                row.style.display = name.includes(filter) ? '' : 'none';
+            });
+        });
+
+        // --- LOGOUT FUNCTION ---
+        window.logout = function() {
+            signOut(auth).then(() => { 
+                window.location.href = "index.html"; 
+            }).catch((error) => {
+                console.error("Logout failed", error);
+            });
+        }
+    </script>
+</body>
+</html>
