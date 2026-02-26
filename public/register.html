@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration | EduEvent Portal</title>
+    <link rel="stylesheet" href="register.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="bg-register">
+
+    <div class="register-container animate-fade-up">
+        <div class="register-card">
+            <div class="register-header">
+                <div class="logo">EduEvent <span class="highlight">Portal</span></div>
+                <h1>Student Registration</h1>
+                <p>Join the community to access exclusive academic events.</p>
+            </div>
+
+            <div class="info-banner">
+                <div class="banner-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><line x1="19" y1="8" x2="19" y2="14"></line><line x1="22" y1="11" x2="16" y2="11"></line></svg>
+                </div>
+                <div class="banner-text">
+                    <h3>Create Your Account</h3>
+                    <p>Enter your institutional details to verify your status.</p>
+                </div>
+            </div>
+
+            <form action="#" class="register-form">
+                <div class="input-group">
+                    <label for="full-name">Full Name</label>
+                    <input type="text" id="full-name" placeholder="Enter your full name" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="department">Department</label>
+                    <select id="department" name="department" required>
+                        <option value="" disabled selected>Select Department</option>
+                        <option value="cse">Computer Science (CSE)</option>
+                        <option value="aids">AI & Data Science (AIDS)</option>
+                        <option value="mech">Mechanical Engineering (MECH)</option>
+                        <option value="civil">Civil Engineering (CIVIL)</option>
+                        <option value="entc">E&TC Engineering</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="student-id">Student ID / Roll Number</label>
+                    <input type="text" id="student-id" placeholder="e.g. 2024-ST-001" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="email">University Email Address</label>
+                    <input type="email" id="email" placeholder="john.doe@university.edu" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="••••••••" required>
+                </div>
+
+                <div class="terms">
+                    <input type="checkbox" id="terms" required>
+                    <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                </div>
+
+                <button type="submit" class="btn-submit animate-pulse">Create Account</button>
+            </form>
+
+            <div class="register-footer">
+                <p>Already have an account? <a href="#" class="highlight">Sign In</a></p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

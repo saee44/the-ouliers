@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Events | EduEvent Portal</title>
+    <link rel="stylesheet" href="event.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <nav class="container">
+            <div class="logo" onclick="window.location.href='index.html'">EduEvent <span class="highlight">Portal</span></div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="event.html" class="active">Events</a></li>
+                <li><a href="#">Venues</a></li>
+                <li><a href="#">Resources</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="btn btn-text" onclick="window.location.href='login.html'">Sign In</button>
+                <button class="btn btn-primary dark" onclick="window.location.href='register.html'">Register</button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container event-page-layout">
+        <aside class="filter-sidebar animate-fade-in">
+            <h3>Filters</h3>
+            
+            <div class="filter-group">
+                <label>Category</label>
+                <div class="checkbox-item"><input type="checkbox" checked> <span>Academic</span></div>
+                <div class="checkbox-item"><input type="checkbox"> <span>Workshops</span></div>
+                <div class="checkbox-item"><input type="checkbox"> <span>Cultural</span></div>
+                <div class="checkbox-item"><input type="checkbox"> <span>Sports</span></div>
+            </div>
+
+            <div class="filter-group">
+                <label>Department</label>
+                <select class="filter-select">
+                    <option>All Departments</option>
+                    <option>CSE</option>
+                    <option>AIDS</option>
+                    <option>MECH</option>
+                    <option>CIVIL</option>
+                    <option>ENTC</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label>Date Range</label>
+                <input type="date" class="filter-input">
+            </div>
+
+            <button class="btn btn-primary full-width">Apply Filters</button>
+        </aside>
+
+        <section class="events-content">
+            <div class="content-header">
+                <h2>Upcoming Academic Events</h2>
+                <div class="search-box">
+                    <input type="text" placeholder="Search events by name...">
+                </div>
+            </div>
+
+            <div class="events-grid">
+                <div class="event-card animate-fade-up">
+                    <div class="event-img science-bg">
+                        <span class="tag tag-green">REGISTRATION OPEN</span>
+                    </div>
+                    <div class="event-info">
+                        <small class="event-date">March 15, 2026</small>
+                        <h3>Annual Science Fair 2026</h3>
+                        <p class="event-location">📍 Main University Hall</p>
+                        <p class="event-desc">Showcase of the most innovative student projects and research papers.</p>
+                        <button class="btn btn-outline" onclick="window.location.href='register.html'">Register Now</button>
+                    </div>
+                </div>
+
+                <div class="event-card animate-fade-up">
+                    <div class="event-img alumni-bg">
+                        <span class="tag tag-dark">INVITE ONLY</span>
+                    </div>
+                    <div class="event-info">
+                        <small class="event-date">April 02, 2026</small>
+                        <h3>Global Alumni Meetup</h3>
+                        <p class="event-location">📍 Grand Ballroom</p>
+                        <p class="event-desc">Network with successful graduates from across the globe in this elite gathering.</p>
+                        <button class="btn btn-outline">View Details</button>
+                    </div>
+                </div>
+
+                <div class="event-card animate-fade-up">
+                    <div class="event-img tech-bg">
+                        <span class="tag tag-orange">LIMITED SEATS</span>
+                    </div>
+                    <div class="event-info">
+                        <small class="event-date">April 20, 2026</small>
+                        <h3>Tech Innovation Summit</h3>
+                        <p class="event-location">📍 Innovation Lab</p>
+                        <p class="event-desc">Exploring AI, Blockchain, and the future of engineering technology.</p>
+                        <button class="btn btn-outline" onclick="window.location.href='register.html'">Register Now</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>
