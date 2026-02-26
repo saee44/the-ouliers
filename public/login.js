@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const password = document.getElementById("password").value.trim();
 
         try {
-            const response = await fetch("/login", {
+            const response = await fetch("http://localhost:3000/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -27,10 +27,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 messageBox.style.color = "green";
                 messageBox.innerText = "Login successful";
 
-                // Store user info
+                // ✅ Store user info properly
                 localStorage.setItem("userId", data.userId);
+                localStorage.setItem("role", data.role);
 
-                // Redirect after login
                 setTimeout(() => {
                     window.location.href = "dashboard.html";
                 }, 1000);
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
         } catch (error) {
             console.error("Error:", error);
             messageBox.style.color = "red";
-            messageBox.innerText = "Server error. Try again.";
+            messageBox.innerText = "Cannot connect to server";
         }
     });
 
